@@ -1,5 +1,4 @@
-class Queue[A](val capacity: Int) {
-    private var elements: List[A] = List()
+class Queue[A](val capacity: Int, private val elements: List[A] = List[A]()) {
 
     override def toString = s"$elements"
 
@@ -24,9 +23,7 @@ class Queue[A](val capacity: Int) {
     
         require(size + 1 <= capacity, "Queue is full! Cannot enqueue.")
 
-        val newQueue = new Queue[A](capacity)
-
-        newQueue.elements = element +: elements
+        val newQueue = new Queue[A](capacity, element +: elements)
 
         newQueue
     
@@ -36,9 +33,7 @@ class Queue[A](val capacity: Int) {
     
         require(!isEmpty, "Queue is empty! Cannot dequeue.")
 
-        val newQueue = new Queue[A](capacity)
-    
-        newQueue.elements = elements.take(size - 1)
+        val newQueue = new Queue[A](capacity, elements.take(size - 1))
 
         newQueue
 
